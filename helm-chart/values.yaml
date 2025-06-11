@@ -1,0 +1,19 @@
+image:
+  repository: localhost:5000/url-shortener
+  tag: latest
+  pullPolicy: Always
+
+replicaCount: 1
+
+domain: qr.dcommunity.space
+apiKey: "how long would it take to thonk about such a long api key"
+
+service:
+  name: url-shortener
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: true
+  domain: dcommunity.space  # Used with `qr.` prefix for full domain
+  certResolver: le
