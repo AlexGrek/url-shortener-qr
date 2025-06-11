@@ -6,7 +6,7 @@ image:
 replicaCount: 1
 
 domain: qr.dcommunity.space
-apiKey: "how long would it take to thonk about such a long api key"
+apiKey: "how long would it take to think about such a long api key"
 
 service:
   name: url-shortener
@@ -15,5 +15,12 @@ service:
 
 ingress:
   enabled: true
-  domain: dcommunity.space  # Used with `qr.` prefix for full domain
+  name: url-shortener-ingress
+  host: qr.dcommunity.space
   certResolver: le
+
+persistence:
+  enabled: true
+  size: 1Gi
+  accessMode: ReadWriteOnce
+  storageClass: local-path
