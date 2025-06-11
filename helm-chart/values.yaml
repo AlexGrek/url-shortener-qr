@@ -1,6 +1,6 @@
 image:
   repository: localhost:5000/url-shortener
-  tag: latest
+  tag: 0.1
   pullPolicy: Always
 
 replicaCount: 1
