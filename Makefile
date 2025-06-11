@@ -1,4 +1,4 @@
-.PHONY: run helm_install helm_upgrade docker-build-push
+.PHONY: run helm_install helm_upgrade docker-build-push uninstall
 
 run:
 	uvicorn main:app --host 0.0.0.0 --port 8000
@@ -11,6 +11,9 @@ helm_upgrade:
 
 helm_template:
 	helm template url-shortener ./helm-chart
+
+uninstall:
+	helm uninstall url-shortener
 
 docker-build-push:
 	docker build . -t localhost:5000/url-shortener:latest
