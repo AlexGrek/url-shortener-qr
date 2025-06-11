@@ -7,11 +7,15 @@ TAG := $(GIT_COMMIT)$(GIT_DIRTY)
 run:
 	uvicorn main:app --host 0.0.0.0 --port 8000
 
+run-debug:
+	export API_KEY="aaaa"
+	export DOMAIN="a.com" && docker run --rm -p 8000:8000 localhost:5000/url-shortener:$(TAG)
+
 helm_install:
-	helm install url-shortener --set image.tag $(TAG) ./helm-chart
+	helm install url-shortener --set image.tag=$(TAG) ./helm-chart
 
 helm_upgrade:
-	helm upgrade url-shortener --set image.tag $(TAG) ./helm-chart
+	helm upgrade url-shortener --set image.tag=$(TAG) ./helm-chart
 
 helm_template:
 	helm template url-shortener ./helm-chart

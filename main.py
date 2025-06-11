@@ -14,7 +14,7 @@ import logging
 import asyncio
 
 # Logging setup
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 # Settings from .env
@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     DOMAIN: str
 
     class Config:
-        env_file = ".env"
+        env_file = "environment.env"
 
 settings = Settings()
 
@@ -31,6 +31,7 @@ API_KEY = os.getenv("API_KEY")
 app = FastAPI()
 cache = Cache("url_cache")
 logger.info(f"API key: {API_KEY}")
+logger.info(f"DOMAIN: {settings.DOMAIN}")
 
 # Cleanup task
 async def cleanup_task():
@@ -48,8 +49,9 @@ async def cleanup_task():
 
 @app.on_event("startup")
 async def startup_event():
+    pass
     asyncio.create_task(cleanup_task())  # Start background cleanup
-    await cleanup_task()  # Run once on startup
+    # await cleanup_task()  # Run once on startup
 
 class CreateRequest(BaseModel):
     ttl: int
